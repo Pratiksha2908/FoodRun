@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_order_app/widgets/provider_widget.dart';
+import 'package:food_run/widgets/provider_widget.dart';
 import 'package:intl/intl.dart';
-import 'package:food_order_app/models/User.dart';
+import 'package:food_run/models/User.dart';
 
 class ProfileView extends StatefulWidget {
   @override
@@ -46,24 +46,45 @@ class _ProfileViewState extends State<ProfileView> {
           child: Provider.of(context).auth.getProfileImage(),
         ),
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Name: ${authData.displayName ?? 'Anonymous'}",
-            style: TextStyle(fontSize: 20),
+          padding: const EdgeInsets.all(4.0),
+          child: Card(
+            elevation: 10.0,
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
+            child: ListTile(
+              leading: Icon(Icons.person, color: Colors.black,),
+              title: Text(
+                "${authData.displayName ?? 'Anonymous'}",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Card(
+            elevation: 10.0,
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
+            child: ListTile(
+              leading: Icon(Icons.email, color: Colors.black,),
+              title: Text(
+                "${authData.email ?? 'Anonymous'}",
+                style: TextStyle(fontSize: 20),
+              ),
+            ),
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Email: ${authData.email ?? 'Anonymous'}",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Created: ${DateFormat('MM/dd/yyyy').format(authData.metadata.creationTime)}",
-            style: TextStyle(fontSize: 20),
+          child: Card(
+            elevation: 10.0,
+            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
+            child: ListTile(
+              leading: Icon(Icons.date_range, color: Colors.black,),
+              title: Text(
+                "Created on ${DateFormat('MM/dd/yyyy').format(authData.metadata.creationTime)}",
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
           ),
         ),
         FutureBuilder(
@@ -78,9 +99,16 @@ class _ProfileViewState extends State<ProfileView> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Home Country: ${_userCountryController.text}",
-                      style: TextStyle(fontSize: 20),
+                    child: Card(
+                      elevation: 10.0,
+                      margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 25.0),
+                      child: ListTile(
+                        leading: Icon(Icons.place, color: Colors.black,),
+                        title: Text(
+                          "Country : ${_userCountryController.text}",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
                     ),
                   ),
                   adminFeature(),

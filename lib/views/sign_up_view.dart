@@ -1,8 +1,8 @@
 import 'package:apple_sign_in/apple_sign_in.dart';
 import 'package:flutter/material.dart';
-import 'package:food_order_app/services/auth_service.dart';
+import 'package:food_run/services/auth_service.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:food_order_app/widgets/provider_widget.dart';
+import 'package:food_run/widgets/provider_widget.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:international_phone_input/international_phone_input.dart';

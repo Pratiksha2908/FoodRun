@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "731358865402",
+    "firebase_url": "https://food-run-flutter.firebaseio.com",
+    "project_id": "food-run-flutter",
+    "storage_bucket": "food-run-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731358865402:android:9c074b19497b69fb772643",
+        "android_client_info": {
+          "package_name": "com.project.food_run"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731358865402-s2ms8riqpgea3gt4kt0o3ojubuj192io.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFOVym-pTmF9EHRTi-HuS_k0cnVjzm-M8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731358865402-s2ms8riqpgea3gt4kt0o3ojubuj192io.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

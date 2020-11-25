@@ -1,4 +1,4 @@
-import 'package:food_order_app/services/auth_service.dart';
+import 'package:food_run/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class Provider extends InheritedWidget {

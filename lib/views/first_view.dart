@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:food_order_app/widgets/custom_dialog.dart';
+import 'package:food_run/widgets/custom_dialog.dart';
 
 class FirstView extends StatelessWidget {
   final primaryColor = const Color(0xFF75A2EA);
