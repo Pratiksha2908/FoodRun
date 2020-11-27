@@ -49,10 +49,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       db: FirebaseFirestore.instance,
       colors: colors,
       child: MaterialApp(
-        title: "Travel Budget App",
+        title: "FoodRun",
         theme: ThemeData(
             brightness: Brightness.light,
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.orange,
 
             textTheme: TextTheme(
                 bodyText2: GoogleFonts.bitter(fontSize: 14.0)
@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         ),
         darkTheme: ThemeData(
             brightness: Brightness.dark,
-            primarySwatch: Colors.blue,
+            primarySwatch: Colors.deepOrange,
 
             textTheme: TextTheme(
                 bodyText2: GoogleFonts.bitter(fontSize: 14.0)

@@ -8,7 +8,7 @@ import 'package:auth_buttons/auth_buttons.dart';
 import 'package:international_phone_input/international_phone_input.dart';
 
 // TODO move this to tone location
-final primaryColor = const Color(0xFF75A2EA);
+final primaryColor = const Color(0xFFffa726);
 
 enum AuthFormType { signIn, signUp, reset, anonymous, convert, phone }
 
@@ -43,7 +43,7 @@ class _SignUpViewState extends State<SignUpView> {
   _SignUpViewState({this.authFormType});
 
   final formKey = GlobalKey<FormState>();
-  String _email, _password, _name, _warning, _phone;
+  String _email, _password, _name, _warning, _phone, _address;
 
   void switchFormState(String state) {
     formKey.currentState.reset();
@@ -84,7 +84,7 @@ class _SignUpViewState extends State<SignUpView> {
             Navigator.of(context).pushReplacementNamed('/home');
             break;
           case AuthFormType.signUp:
-            await auth.createUserWithEmailAndPassword(_email, _password, _name);
+            await auth.createUserWithEmailAndPassword(_email, _password, _name, _address);
             Navigator.of(context).pushReplacementNamed('/home');
             break;
           case AuthFormType.reset:
@@ -99,7 +99,7 @@ class _SignUpViewState extends State<SignUpView> {
             Navigator.of(context).pushReplacementNamed('/home');
             break;
           case AuthFormType.convert:
-            await auth.convertUserWithEmail(_email, _password, _name);
+            await auth.convertUserWithEmail(_email, _password, _name, _address);
             Navigator.of(context).pop();
             break;
           case AuthFormType.phone:
@@ -258,6 +258,18 @@ class _SignUpViewState extends State<SignUpView> {
       textFields.add(SizedBox(height: 20));
     }
 
+    // if ([AuthFormType.signUp, AuthFormType.convert].contains(authFormType)) {
+    //   textFields.add(
+    //     TextFormField(
+    //       validator: NameValidator.validate,
+    //       style: TextStyle(fontSize: 22.0),
+    //       decoration: buildSignUpInputDecoration("Location (City, State)"),
+    //       onSaved: (value) => _address = value,
+    //     ),
+    //   );
+    //   textFields.add(SizedBox(height: 20));
+    // }
+
     // add email & password
     if ([
       AuthFormType.signUp,
@@ -296,7 +308,7 @@ class _SignUpViewState extends State<SignUpView> {
             decoration: buildSignUpInputDecoration("Enter Phone Number"),
             onPhoneNumberChange: onPhoneNumberChange,
             initialPhoneNumber: _phone,
-            initialSelection: 'US',
+            initialSelection: 'INDIA',
             showCountryCodes: true),
       );
       textFields.add(SizedBox(height: 20));

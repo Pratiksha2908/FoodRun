@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -22,17 +25,9 @@ class AuthService {
     return _firebaseAuth.currentUser;
   }
 
-  getProfileImage() {
-    if(_firebaseAuth.currentUser.photoURL != null) {
-      return Image.network(_firebaseAuth.currentUser.photoURL, height: 100, width: 100);
-    } else {
-      return Icon(Icons.account_circle, size: 100);
-    }
-  }
-
   // Email & Password Sign Up
   Future<String> createUserWithEmailAndPassword(
-      String email, String password, String name) async {
+      String email, String password, String name, String address) async {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -73,7 +68,7 @@ class AuthService {
   }
 
   Future convertUserWithEmail(
-      String email, String password, String name) async {
+      String email, String password, String name, String address) async {
     final currentUser = _firebaseAuth.currentUser;
 
     final credential =
@@ -136,7 +131,7 @@ class AuthService {
         break;
 
       case AuthorizationStatus.cancelled:
-        print("User Cancled");
+        print("User Canceled");
         break;
     }
   }

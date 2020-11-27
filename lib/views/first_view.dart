@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:food_run/widgets/custom_dialog.dart';
 
 class FirstView extends StatelessWidget {
-  final primaryColor = const Color(0xFF75A2EA);
+  final primaryColor = const Color(0xFFffa726);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class FirstView extends StatelessWidget {
                 ),
                 SizedBox(height: _height * 0.10),
                 AutoSizeText(
-                  "Let’s start planning your next trip",
+                  "Let’s start...",
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -9,11 +9,11 @@ class CustomColors {
 
     if(brightness == Brightness.dark) {
       this.text1 = Color(0xff252223);
-      this.primary = Color(0xff3c7778);
+      this.primary = Colors.deepOrange;
 
     } else {
       this.text1 = Colors.white;
-      this.primary = Color(0xff57AEAF);
+      this.primary = Color(0xFFffa726);
     }
   }
 
