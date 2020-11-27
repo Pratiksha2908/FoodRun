@@ -12,53 +12,58 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TabController controller;
+
   int _currentIndex = 0;
   final List<Widget> _children = [
-    ProfileView(),
     ActivityView(),
+    ProfileView(),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: () {try {Provider.of(context).auth.signOut();} catch (e) {print(e);}},
-              alignment: Alignment.centerRight,
-              icon: Icon(Icons.exit_to_app, color: Color(0xFFffa726),)),
-        ],
-        title: Text("FoodRun", style: TextStyle(color: Color(0xFFffa726), fontWeight: FontWeight.bold),),
-        backgroundColor: Colors.white,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFFffa726),
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context){ return VisitedRestaurant();}));
-        },
-        child: Icon(Icons.add, color: Colors.white, size: 40.0,),
-        elevation: 2.0,
-      ),
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        notchMargin: 6.0,
-        clipBehavior: Clip.antiAlias,
-        child: BottomNavigationBar(
-            onTap: onTabTapped,
-            currentIndex: _currentIndex,
-            items: [
-              BottomNavigationBarItem(
-                icon: new Icon(Icons.person),
-                title: new Text("Profile"),
-              ),
-              BottomNavigationBarItem(
-                icon: new Icon(Icons.format_list_bulleted),
-                title: new Text("Activity"),
-              ),
-            ]
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(onPressed: () {try {Provider.of(context).auth.signOut();} catch (e) {print(e);}},
+                alignment: Alignment.centerRight,
+                icon: Icon(Icons.exit_to_app, color: Color(0xFFffa726),)),
+          ],
+          title: Text("FoodRun", style: TextStyle(color: Color(0xFFffa726), fontWeight: FontWeight.bold),),
+          backgroundColor: Colors.white,
         ),
-      )
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFFffa726),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context){ return VisitedRestaurant();}));
+          },
+          child: Icon(Icons.add, color: Colors.white, size: 40.0,),
+          elevation: 2.0,
+        ),
+        body: _children[_currentIndex],
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          notchMargin: 6.0,
+          clipBehavior: Clip.antiAlias,
+          child: BottomNavigationBar(
+              onTap: onTabTapped,
+              currentIndex: _currentIndex,
+              items: [
+                BottomNavigationBarItem(
+                  icon: new Icon(Icons.home),
+                  title: new Text("Home"),
+                ),
+                BottomNavigationBarItem(
+                  icon: new Icon(Icons.person),
+                  title: new Text("Profile"),
+                ),
+              ]
+          ),
+        ),
+      ),
     );
   }
 
