@@ -38,20 +38,6 @@ class HomePageState extends State<HomePage> {
                 return RestaurantRow(snapshot);
               },
             ),
-            new Divider(height: 1.0),
-            new Builder(
-              builder: (BuildContext context) {
-                return new Padding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 0.0, 12.0, 12.0),
-                  child: new FloatingActionButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed("/chat");
-                    },
-                    child: new Icon(Icons.chat),
-                  ),
-                );
-              },
-            )
           ]),
         ));
   }
