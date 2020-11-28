@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'visited_restaurant.dart';
-import 'activity_view.dart';
+import 'package:food_run/views/post_restaurant_page.dart';
+import 'home_page.dart';
 import 'profile_view.dart';
 import 'package:food_run/widgets/provider_widget.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 class Home extends StatefulWidget {
   @override
@@ -12,11 +14,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  TabController controller;
+
+  DataSnapshot snapshot;
 
   int _currentIndex = 0;
   final List<Widget> _children = [
-    ActivityView(),
+    HomePage(),
     ProfileView(),
   ];
 
@@ -31,14 +34,15 @@ class _HomeState extends State<Home> {
                 alignment: Alignment.centerRight,
                 icon: Icon(Icons.exit_to_app, color: Color(0xFFffa726),)),
           ],
-          title: Text("FoodRun", style: TextStyle(color: Color(0xFFffa726), fontWeight: FontWeight.bold),),
+          title: Text("FoodRun", style: TextStyle(color: Color(0xFFffa726),),),
           backgroundColor: Colors.white,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
+          heroTag: null,
           backgroundColor: Color(0xFFffa726),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context){ return VisitedRestaurant();}));
+            Navigator.push(context, MaterialPageRoute(builder: (context){ return PostRestaurantPage();}));
           },
           child: Icon(Icons.add, color: Colors.white, size: 40.0,),
           elevation: 2.0,

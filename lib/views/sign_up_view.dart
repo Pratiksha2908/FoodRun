@@ -388,7 +388,6 @@ class _SignUpViewState extends State<SignUpView> {
           switchFormState(_newFormState);
         },
       ),
-      buildSocialIcons(_showSocial),
     ];
   }
 
@@ -404,61 +403,6 @@ class _SignUpViewState extends State<SignUpView> {
             authFormType = AuthFormType.reset;
           });
         },
-      ),
-      visible: visible,
-    );
-  }
-
-  Widget buildSocialIcons(bool visible) {
-    final _auth = Provider.of(context).auth;
-    return Visibility(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Divider(
-            color: Colors.white,
-          ),
-          SizedBox(height: 10),
-          buildAppleSignIn(_auth),
-          SizedBox(height: 10),
-          GoogleAuthButton(
-            onPressed: () async {
-              try {
-                if (authFormType == AuthFormType.convert) {
-                  await _auth.convertWithGoogle();
-                  Navigator.of(context).pop();
-                } else {
-                  await _auth.signInWithGoogle();
-                  Navigator.of(context).pushReplacementNamed('/home');
-                }
-              } catch (e) {
-                setState(() {
-                  _warning = e.message;
-                });
-              }
-            },
-          ),
-          RaisedButton(
-            color: Colors.green,
-            textColor: Colors.white,
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.phone),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 14.0, top: 10.0, bottom: 10.0),
-                  child: Text("Sign in with Phone",
-                      style: TextStyle(fontSize: 18)),
-                )
-              ],
-            ),
-            onPressed: () {
-              setState(() {
-                authFormType = AuthFormType.phone;
-              });
-            },
-          ),
-        ],
       ),
       visible: visible,
     );
