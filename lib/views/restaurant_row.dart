@@ -26,12 +26,13 @@ class RestaurantRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    var size = MediaQuery.of(context).size;
+    double maxWidth = MediaQuery.of(context).size.width * 0.7;
+   var size = MediaQuery.of(context).size;
 //    final double itemHeight = (size.height - kToolbarHeight - 24) / 2.2;
-//    final double itemWidth = size.width;
+   final double itemWidth = size.width*0.7;
     return new Container(
       child: new InkWell(
-        child: new Card(
+        child: Card(
           elevation: 2.5,
           child: Row(
             children: [
@@ -63,14 +64,19 @@ class RestaurantRow extends StatelessWidget {
                   new Padding(
                     padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
                     child: new Text(
-                      snapshot.value['DESCRIPTION'],
+                      "Location : "+snapshot.value['DESCRIPTION'],
                       style: new TextStyle(
-                          fontWeight: FontWeight.normal, fontSize: 16.0, color: Colors.orange),
+                          color: Colors.orange, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
-                    child: Text(snapshot.value['username'],
+                    child: Text("Delivery Fee : Rs. "+snapshot.value['DeliveryFee'],
+                        style: new TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 8.0, 0.0, 0.0),
+                    child: Text("Posted by : "+snapshot.value['username'],
                         style: new TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
                   ),
                 ],

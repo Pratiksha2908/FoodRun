@@ -55,93 +55,110 @@ class _PostPage extends StatefulWidget {
 class _PostPageState extends State<_PostPage> {
   final TextEditingController _title = new TextEditingController();
   final TextEditingController _desc = new TextEditingController();
+  final TextEditingController _delivery = new TextEditingController();
   bool _isTitle = false;
   bool _isDesc = false;
   bool _isLoading = false;
+  bool _isDeliveryFee = false;
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: new SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        reverse: true,
-        child: new Container(
-          child: new Column(
-            children: <Widget>[
-              new Padding(
-                padding: const EdgeInsets.only(top: 24.0),
-                child: _isLoading ? new CircularProgressIndicator(backgroundColor: Colors.orange,) : null,
-              ),
-              new Padding(padding: const EdgeInsets.only(top: 24.0)),
-              new Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: new TextField(
-                  cursorColor: Colors.orange,
-                  controller: _title,
-                  style: new TextStyle(
-                    color: Colors.black,
-                    fontSize: 18.0,
-                  ),
-                  onChanged: (String text) {
-                    setState(() {
-                      _isTitle = text.length > 0;
-                    });
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Restaurant Name'
-                  ),
+      child: new Container(
+        child: new Column(
+          children: <Widget>[
+            new Padding(
+              padding: const EdgeInsets.only(top: 24.0),
+              child: _isLoading ? new CircularProgressIndicator(backgroundColor: Colors.orange,) : null,
+            ),
+            new Padding(padding: const EdgeInsets.only(top: 24.0)),
+            new Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: new TextField(
+                cursorColor: Colors.orange,
+                controller: _title,
+                style: new TextStyle(
+                  color: Colors.black,
+                  fontSize: 18.0,
+                ),
+                onChanged: (String text) {
+                  setState(() {
+                    _isTitle = text.length > 0;
+                  });
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Restaurant Name'
                 ),
               ),
-              new Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: new TextField(
-                  cursorColor: Colors.orange,
-                  controller: _desc,
-                  style: new TextStyle(color: Colors.black, fontSize: 18.0),
-                  onChanged: (String text) {
-                    setState(() {
-                      _isDesc = text.length > 0;
-                    });
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Restaurant Location'
-                  ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: new TextField(
+                cursorColor: Colors.orange,
+                controller: _desc,
+                style: new TextStyle(color: Colors.black, fontSize: 18.0),
+                onChanged: (String text) {
+                  setState(() {
+                    _isDesc = text.length > 0;
+                  });
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Restaurant Location'
                 ),
               ),
-              new Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: new RaisedButton(
-                  padding: const EdgeInsets.only(
-                      left: 45.0, right: 45.0, top: 15.0, bottom: 15.0),
-                  color: Colors.orange,
-                  elevation: 2.0,
-                  child: new Text(
-                    "Post",
-                    style: new TextStyle(color: Colors.white),
-                  ),
-                  onPressed: _isTitle && _isDesc && !_isLoading
-                      ? () => _handleSubmitted(_title.text, _desc.text)
-                      : null,
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: new TextField(
+                cursorColor: Colors.orange,
+                controller: _delivery,
+                keyboardType: TextInputType.number,
+                style: new TextStyle(color: Colors.black, fontSize: 18.0),
+                onChanged: (value) {
+                  final doubleVar = double.parse(value);
+                  final stringValue = doubleVar.toString();
+                  setState(() {
+                    _isDeliveryFee = stringValue.length > 0;
+                  });
+                },
+                decoration: kTextFieldDecoration.copyWith(
+                    hintText: 'Delivery Fee'
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            new Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: new RaisedButton(
+                padding: const EdgeInsets.only(
+                    left: 45.0, right: 45.0, top: 15.0, bottom: 15.0),
+                color: Colors.orange,
+                elevation: 2.0,
+                child: new Text(
+                  "Post",
+                  style: new TextStyle(color: Colors.white),
+                ),
+                onPressed: _isTitle && _isDesc && _isDeliveryFee && !_isLoading
+                    ? () => _handleSubmitted(_title.text, _desc.text, _delivery.value.text)
+                    : null,
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Future<Null> _handleSubmitted(String title, String desc) async {
+  Future<Null> _handleSubmitted(String title, String desc, String delivery) async {
     setState(() {
       _isLoading = true;
     });
 
     // StorageReference ref = FirebaseStorage.instance.ref().child("Blog_Images/" +
     //     new DateTime.now().millisecondsSinceEpoch.toString()); //new//new
-    _addBlog(title, desc);
+    _addBlog(title, desc, delivery);
   }
 
-  void _addBlog(String title, String desc) {
+  void _addBlog(String title, String desc, String delivery) {
 //    print(googleSignIn.currentUser.displayName);
 //    print(googleSignIn.currentUser.id);
 //    print(title);
@@ -150,6 +167,7 @@ class _PostPageState extends State<_PostPage> {
     reference.push().set({
       'Title': title,
       'DESCRIPTION': desc,
+      'DeliveryFee': delivery,
       'uid': (_firebaseAuth.currentUser).uid,
       // 'uid': googleSignIn.currentUser.id,
       'username': _firebaseAuth.currentUser.displayName
@@ -165,8 +183,10 @@ class _PostPageState extends State<_PostPage> {
       _isLoading = false;
       _title.clear();
       _desc.clear();
+      _delivery.clear();
       _isTitle = false;
       _isDesc = false;
+      _isDeliveryFee = false;
     });
     Scaffold.of(context).showSnackBar(new SnackBar(
       content: new Text("Posted Successfully!"),
