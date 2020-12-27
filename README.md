@@ -1,6 +1,8 @@
-# food_run
+# Food Run Flutter App
 
-A new Flutter application.
+A Flutter application.
+
+<img src="https://user-images.githubusercontent.com/71315238/103170896-ea089c00-486d-11eb-93f8-aee5b806e8a7.jpg" width="200" height="400" /> 
 
 ## Getting Started
 
